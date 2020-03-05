@@ -1,29 +1,70 @@
 package model;
 
-public class Department{
+public class Department {
 
-    private Office firstOffice;
+	private Office firstOffice;
 
-    public Department(){
+	public Department() {
 
+	}
 
-    }
+	public void addOffice(String code, int floor) {
 
-    public Office searchOffice(String code) throws Exception {
+		Office of = new Office(code, floor);
 
-        Office o = firstOffice;
+		if (firstOffice == null) {
+			firstOffice = of;
+		} else {
+			Office current = firstOffice;
+			while (current.getNextOffice() != null) {
+				current = current.getNextOffice();
+			}
+		}
 
-        if(o.getNextOffice() == null){
-            throw new Exception();
-        }else if(o.getCode().equals(code)){
+	}
 
-            return o;
+	public Office searchOffice(String code) throws Exception {
 
-        }
-        //while ()
+		Office o = firstOffice;
 
-        return o;
+		if (o.getNextOffice() == null) {
+			throw new Exception();
+		} else if (o.getCode().equals(code)) {
 
-    }
+			return o;
+
+		}else {
+			o = o.getNextOffice();
+			while(!o.getCode().equals(code)) {
+				o = o.getNextOffice();
+			}
+		}
+		
+
+		return o;
+
+	}
+
+	public Office removeOffice(String code) {
+		Office current = firstOffice;
+		Office pre = null;
+
+		while (current != null && !current.getCode().equals(code)) {
+			pre = current;
+			current = current.getNextOffice();
+
+		}
+		if (current != null) {
+			if (current == firstOffice) {
+				firstOffice = firstOffice.getNextOffice();
+
+			} else {
+				pre.setNextOffice(current.getNextOffice());
+			}
+		}
+
+		return current;
+
+	}
 
 }

@@ -9,7 +9,9 @@ public class Main{
     	
     	d.addOffice("Camilo", 1);
     	d.addOffice("Andres", 1);
-    	d.addOffice("Sarmiento", 1);
+		d.addOffice("Zarmiento", 1);
+		d.addOffice("Barmiento", 1);
+		d.addOffice("Jarmiento", 1);
     	
     	
     	System.out.println(d.report());

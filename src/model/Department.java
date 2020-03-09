@@ -33,13 +33,12 @@ public class Department {
 
 			return o;
 
-		}else {
+		} else {
 			o = o.getNextOffice();
-			while(!o.getCode().equals(code)) {
+			while (!o.getCode().equals(code)) {
 				o = o.getNextOffice();
 			}
 		}
-		
 
 		return o;
 
@@ -65,6 +64,46 @@ public class Department {
 
 		return current;
 
+	}
+
+	public void sortByCode() {
+
+
+		//modelo estandar de ordenamiento natural para listas 
+		//sencillamente enlazadas usando bubble sort mejorado
+		//se debe calcular leght de la lista previamente.
+
+	/* 	if (length > 1) {
+			boolean cambio;
+			do {
+				Materia actual = first;
+				Materia anterior = null;
+				Materia siguiente = first.siguiente;
+				cambio = false;
+				while (siguiente != null) {
+					if (actual.getNombre().compareTo(siguiente.getNombre()) > 0) {
+						cambio = true;
+						if (anterior != null) {
+							Materia sig = siguiente.siguiente;
+							anterior.siguiente = siguiente;
+							siguiente.siguiente = actual;
+							actual.siguiente = sig;
+						} else {
+							Materia sig = siguiente.siguiente;
+							first = siguiente;
+							siguiente.siguiente = actual;
+							actual.siguiente = sig;
+						}
+						anterior = siguiente;
+						siguiente = actual.siguiente;
+					} else {
+						anterior = actual;
+						actual = siguiente;
+						siguiente = siguiente.siguiente;
+					}
+				}
+			} while (cambio);
+		} */
 	}
 
 }

@@ -17,8 +17,11 @@ public class Department {
 		} else {
 			Office current = firstOffice;
 			while (current.getNextOffice() != null) {
+
 				current = current.getNextOffice();
 			}
+
+			current.setNextOffice(of);
 		}
 
 	}
@@ -68,42 +71,53 @@ public class Department {
 
 	public void sortByCode() {
 
+		if (firstOffice != null) {
+			if (firstOffice.getNextOffice() != null) {
+				boolean change;
+				do {
 
-		//modelo estandar de ordenamiento natural para listas 
-		//sencillamente enlazadas usando bubble sort mejorado
-		//se debe calcular leght de la lista previamente.
-
-	/* 	if (length > 1) {
-			boolean cambio;
-			do {
-				Materia actual = first;
-				Materia anterior = null;
-				Materia siguiente = first.siguiente;
-				cambio = false;
-				while (siguiente != null) {
-					if (actual.getNombre().compareTo(siguiente.getNombre()) > 0) {
-						cambio = true;
-						if (anterior != null) {
-							Materia sig = siguiente.siguiente;
-							anterior.siguiente = siguiente;
-							siguiente.siguiente = actual;
-							actual.siguiente = sig;
+					Office current = firstOffice;
+					Office previousOffice = null;
+					Office nextOffice = firstOffice.getNextOffice();
+					change = false;
+					while (nextOffice != null) {
+						if (current.getCode().compareTo(nextOffice.getCode()) > 0) {
+							change = true;
+							if (previousOffice != null) {
+								Office sig = nextOffice.getNextOffice();
+								previousOffice.setNextOffice(nextOffice);
+								nextOffice.setNextOffice(current);
+								current.setNextOffice(sig);
+							} else {
+								Office sig = nextOffice.getNextOffice();
+								firstOffice = nextOffice;
+								nextOffice.setNextOffice(current);
+								current.setNextOffice(sig);
+							}
+							previousOffice = nextOffice;
+							nextOffice = current.getNextOffice();
 						} else {
-							Materia sig = siguiente.siguiente;
-							first = siguiente;
-							siguiente.siguiente = actual;
-							actual.siguiente = sig;
+							previousOffice = current;
+							current = nextOffice;
+							nextOffice = nextOffice.getNextOffice();
 						}
-						anterior = siguiente;
-						siguiente = actual.siguiente;
-					} else {
-						anterior = actual;
-						actual = siguiente;
-						siguiente = siguiente.siguiente;
 					}
-				}
-			} while (cambio);
-		} */
+				} while (change);
+			}
+		}
+
+	}
+
+	public String report() {
+		String s = "";
+
+		Office current = firstOffice;
+		while (current != null) {
+			s += current.getCode() + " ";
+			current = current.getNextOffice();
+		}
+
+		return s;
 	}
 
 }
